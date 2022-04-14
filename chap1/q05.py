@@ -1,6 +1,4 @@
 from typing import List, Union
-
-from pkg_resources import parse_requirements
 from q03 import decompose_sentence
 
 def get_ngram(n: int, target: Union[str, List[str]]) -> Union[List[str], List[List[str]]]:
