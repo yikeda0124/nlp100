@@ -12,8 +12,17 @@ if __name__ == '__main__':
     for chunk in sentence.chunks:
         for morph in chunk.morphs:
             if morph.pos == '名詞':
-                path = [''.join(morph.surface for morph in chunk.morphs if morph.pos != '記号')]
-                while chunk.dst != -1: 
-                    path.append(''.join(morph.surface for morph in sentence.chunks[chunk.dst].morphs if morph.pos != '記号'))
+                path = []
+                tmp_str = ''
+                for morph in chunk.morphs:
+                    if morph.pos != '記号':
+                        tmp_str += morph.surface
+                path.append(tmp_str)
+                while chunk.dst != -1:
+                    tmp_str = ''
+                    for morph in sentence.chunks[chunk.dst].morphs:
+                        if morph.pos != '記号':
+                            tmp_str += morph.surface
+                    path.append(tmp_str)
                     chunk = sentence.chunks[chunk.dst]
                 print(' -> '.join(path))
